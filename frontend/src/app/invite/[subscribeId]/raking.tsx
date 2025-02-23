@@ -1,9 +1,15 @@
 import Image from "next/image";
-import MedalGold from "../../assets/medal-1.svg";
-import MedalSilver from "../../assets/medal-2.svg";
-import MedalCooper from "../../assets/medal-3.svg";
+import MedalGold from "../../../assets/medal-1.svg";
+import MedalSilver from "../../../assets/medal-2.svg";
+import MedalCooper from "../../../assets/medal-3.svg";
 
-export const Ranking = () => {
+interface IRankingProps {
+  subscribeId: string;
+}
+
+export const Ranking = async ({ subscribeId }: IRankingProps) => {
+  // const accessCount = await getSub
+
   return (
     <div className="w-full max-w-[440px] space-y-5">
       <h2 className="text-gray-200 text-xl font-heading font-semibold leading-none">

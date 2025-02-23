@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, Mail, User } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 import * as Motion from "motion/react-client";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../../components/Button";
@@ -16,6 +17,9 @@ const subscribeSchema = z.object({
 type Subscribe = z.infer<typeof subscribeSchema>;
 
 export const SubscriptionForm = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const {
     register,
     handleSubmit,
@@ -25,7 +29,9 @@ export const SubscriptionForm = () => {
   });
 
   const onSubscribe = (data: Subscribe) => {
-    console.log(data);
+    const referrer = searchParams.get("referrer");
+    console.log(data, referrer);
+    router.push(`/invite/${1}`);
   };
 
   return (
