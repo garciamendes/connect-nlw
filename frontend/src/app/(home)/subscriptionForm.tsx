@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
+import { postSubscriptions } from "@/src/http/api";
 
 const subscribeSchema = z.object({
   name: z.string().min(2, "Digite seu nome completo"),
@@ -28,10 +29,10 @@ export const SubscriptionForm = () => {
     resolver: zodResolver(subscribeSchema),
   });
 
-  const onSubscribe = (data: Subscribe) => {
+  const onSubscribe = async (data: Subscribe) => {
     const referrer = searchParams.get("referrer");
-    console.log(data, referrer);
-    router.push(`/invite/${1}`);
+    const { subscriberId } = await postSubscriptions({ name: data.name, email: data.email, referrer })
+    router.push(`/invite/${subscriberId}`);
   };
 
   return (
